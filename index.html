@@ -3,133 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Memory</title>
     <link rel="stylesheet" href="css/main.css">
     <script defer src="js/main.js"> </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <h1 class="title">CONCENTRATION</h1>
-        <h2 class="title">MEMORY GAME</h2>
+        <h2 class="title">THE MEMORY GAME</h2>
     </header>
-
-    <section class="header">
-        <div class="result"></div>
-        <div class="guess_count">Set your Guess Count</div>
-    </section>
-
+    
     <main>
-        <div class="memory_game">
+        <section class="game">
+            <div class="memory_game">
+                
+                <div class="card_face pair_1">
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/1.webp" alt="bird1" class="1">
+                    </div>
+                </div>
+                <div class="card_face pair_1"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/1.webp" alt="bird1" class="2">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_2"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/2.webp" alt="bird2" class="3">
+                    </div>
+                </div>
+                <div class="card_face pair_2"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/2.webp" alt="bird2" class="4">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_3"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/3.webp" alt="duck" class="5">
+                    </div>
+                </div>
+                <div class="card_face pair_3"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/3.webp" alt="duck" class="6">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_4"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/11.webp" alt="fish" class="7">
+                    </div>
+                </div>
+                <div class="card_face pair_4"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/11.webp" alt="fish" class="8">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_5"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/5.webp" alt="rooster" class="9">
+                    </div>
+                </div>
+                <div class="card_face pair_5"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/5.webp" alt="rooster" class="10">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_6"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/6.webp" alt="owl" class="11">
+                    </div>
+                </div>
+                <div class="card_face pair_6"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/6.webp" alt="owl" class="12">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_7"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/7.webp" alt="monkey" class="13">
+                    </div>
+                </div>
+                <div class="card_face pair_7">
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/7.webp" alt="monkey" class="14">
+                    </div>
+                </div>
+                
+                <div class="card_face pair_8">
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/8.webp" alt="landscape" class="15">
+                    </div>
+                </div>
+                <div class="card_face pair_8"> 
+                    <div class="card_face_front"></div>
+                    <div class="card_face_back">
+                        <img src="images/lvl1/8.webp" alt="landscape" class="16">
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        <section class="infoCard">
+            <div class="result">Click any card to get started!</div>
+            <!-- <div id="timer">00 : 00</div> -->
+            <button type="button" id="shuffle">SHUFFLE CARDS</button>
+            <button type="button" id="play_again">PLAY AGAIN</button>
+            <div id="art">The artwork featured on these cards were created by a Japanese painter and print designer by the name of Ohara Koson (1877-1945). You can find more of his work <a href="https://www.rawpixel.com/board/431491/ohara-koson-free-public-domain-vintage-flowers-and-animals-prints">here</a>.</div>
+            <div class="guess_count"> </div>
 
-            <div class="card_face pair_1">
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/1.webp" alt="bird1" class="1">
-                </div>
+            <button class="show">Too Difficult?</button>
+            <div class="guess_options">
+                <a>Feel free to adjust the amount of guesses</a>
+                <input placeholder = "guesses" class="user_guesses"></input>
+                <button class="change_guess">SUBMIT</button>
             </div>
-            <div class="card_face pair_1"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/1.webp" alt="bird1" class="2">
-                </div>
-            </div>
-            
-            <div class="card_face pair_2"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/2.webp" alt="bird2" class="3">
-                </div>
-            </div>
-            <div class="card_face pair_2"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/2.webp" alt="bird2" class="4">
-                </div>
-            </div>
-            
-            <div class="card_face pair_3"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/3.webp" alt="duck" class="5">
-                </div>
-            </div>
-            <div class="card_face pair_3"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/3.webp" alt="duck" class="6">
-                </div>
-            </div>
-            
-            <div class="card_face pair_4"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/11.webp" alt="fish" class="7">
-                </div>
-            </div>
-            <div class="card_face pair_4"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/11.webp" alt="fish" class="8">
-                </div>
-            </div>
-            
-            <div class="card_face pair_5"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/5.webp" alt="rooster" class="9">
-                </div>
-            </div>
-            <div class="card_face pair_5"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/5.webp" alt="rooster" class="10">
-                </div>
-            </div>
-            
-            <div class="card_face pair_6"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/6.webp" alt="owl" class="11">
-                </div>
-            </div>
-            <div class="card_face pair_6"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/6.webp" alt="owl" class="12">
-                </div>
-            </div>
-            
-            <div class="card_face pair_7"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/7.webp" alt="monkey" class="13">
-                </div>
-            </div>
-            <div class="card_face pair_7">
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/7.webp" alt="monkey" class="14">
-                </div>
-            </div>
-            
-            <div class="card_face pair_8">
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/8.webp" alt="landscape" class="15">
-                </div>
-            </div>
-            <div class="card_face pair_8"> 
-                <div class="card_face_front"></div>
-                <div class="card_face_back">
-                    <img src="images/lvl1/8.webp" alt="landscape" class="16">
-                </div>
-            </div>
-
-        </div>
+        </section>
     </main>
 </body>
 </html>

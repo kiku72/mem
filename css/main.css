@@ -15,20 +15,177 @@
 
 
 body {
-    height: 100vh;
     background-color: var(--background);
 }
 
 h1 {
     font-size: 10vmax;
-    text-align: center;
-    color: var(--primary);
 }
 
 h2 {
     font-size: 5vmax;
-    text-align: center;
     color: var(--text);
+    bottom: 30%;
+}
+
+header {
+    animation: fadeInOut 3s linear 1 forwards;
+    color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.infoCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary);
+    position: fixed;
+    bottom: 10%;
+    animation: fadeIn 4.5s linear 1 forwards;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 50%;
+    margin-right: 50%;
+    margin: 0 auto;
+}
+
+.result {
+    font-size: 6vmin;
+    position: absolute;
+    margin: 0 auto;
+    margin-bottom: 15vh;
+
+}
+
+#shuffle {
+    position: absolute;
+    margin: 0 auto;
+    font-size: 2vh;
+    margin-bottom: -14vh;
+    color: var(--accent);
+    background-color: var(--secondary);
+    border-radius: 6px;
+    border: none;
+    color: var(--accent);
+    padding: 10px;
+    width: 200px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.guess_count {
+    position: absolute;
+    margin: 0 auto;
+    font-size: 3vh;
+    margin-bottom: 26vh;
+}
+
+
+#play_again {
+    position: absolute;
+    margin: 0 auto;
+    font-size: 3vh;
+    margin-bottom: 40vh;
+    color: var(--accent);
+    background-color: var(--secondary);
+    border-radius: 6px;
+    border: none;
+    padding: 15px;
+    width: 35%;
+    opacity: 0.6;
+    cursor: pointer;
+
+}
+
+a {
+    color: var(--accent);
+}
+
+.show {
+    margin: 0 auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    font-size: 2vh;
+    color: var(--accent);
+    font-weight: 300;
+    visibility: hidden;
+}
+.guess_options {
+    visibility: hidden;
+    position: absolute;
+    margin: 0 auto;
+    font-size: 2vh;
+    border-bottom: 1px solid var(--primary);
+    border-spacing: px;
+    margin: 0 auto;
+}
+.user_guesses {
+    border: none;
+    font-size: 2vh;
+    opacity: 0.5;
+    width: 8ch;
+    text-align: center;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.change_guess {
+    color: var(--accent);
+    font-size: 2vh;
+    background-color: var(--secondary);
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+    width: 100px;
+    opacity: 0.6;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+
+#art {
+    visibility: hidden;
+    min-width: 35rem;
+    margin: 0 auto;
+    text-align: center;
 }
 
 
@@ -39,32 +196,32 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    align-content: center;
     flex-wrap: wrap;
     gap: .5vmin;
-    perspective: 1000px
-    /* border: solid 3px yellow; */
+    min-width: 91vw;
+    animation: fadeIn 4s linear 1 forwards;
 }
 
 .card_face:hover {
-    /* bug - messes with the click event */
     transform: scale(1.05);
     transition: 0.4s;
 }
 
-/* apply to flip */
 .card_face.is-flipped {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
 }
 
 
 .card_face {
+    vertical-align: center;
+    margin-top: 1vh;
     position: relative;
     height: 15vmax;
-    width: 10vmax;
+    min-width: 10vmax;
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
+    cursor: pointer;
 }
 
 .card_face_front, .card_face_back {
@@ -78,30 +235,48 @@ h2 {
 }
 
 .card_face_front {
-    background: var(--secondary);
+    background: var(--primary);
 }
 
 .card_face_back {
-    transform: rotateX(180deg);
+    transform: rotateY(180deg);
 }
 
 img {
     width: 100%;
     object-fit: contain;
+    
+    
 }
 
 
 
 
 
-@media (width < 600px) {
+@media (width < 850px) {
+    h1 {
+        font-size: 11vw;
+    }
+    
+    h2 {
+        font-size: 5vw;
+    }
     .memory_game {
-        width: 50vw;
-        height: 65vh;
+        min-height: 50vmax;
+        max-height: 40vh;
+        min-width: 95vw;
+    }
+    
+    .card_face {
+        height: 13vh;
+        width: 20%;
     }
 
-    .card_face {
-        height: 7vmax;
-        width: 10vmax;
+    img {
+        height: 15vmax;
+        width: 100%;
+        object-fit: cover;
+        object-position: 50% 30%;
     }
+
 }

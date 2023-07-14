@@ -1,17 +1,15 @@
 /*----- constants -----*/
 const result = {
-    '0' : '',
-    '1' : 'correct',
-    '2' : 'incorrect'
+    correct : ['Nice!', 'Well Done!', 'Perfect!', 'Doing Great!'],
+    incorrect : ['Not quite!', 'Try Again!', 'Oops!', 'Keep Trying!' ]
 }
-const outcome = '';
-
-
 
 /*----- state variables -----*/
-let guessCount = 15;
-let time = 0;
+let startingGuesses = 1;
+let guessCount = 1;
 let count = 0;
+let firstCard;
+let newGuesses = 0;
 
 
 /*----- cached elements  -----*/
@@ -20,42 +18,50 @@ const remainingGuess = document.querySelector('.guess_count');
 const results = document.querySelector('.result');
 
 const images = document.querySelectorAll('img');
-const cardBacks = document.querySelectorAll('.card_face_back')
+const cardBacks = document.querySelectorAll('.card_face_back');
 
-const board = document.querySelector('.memory_game');
+const playAgain = document.getElementById('play_again');
+const shuffleBtn = document.getElementById('shuffle');
 
-// !! needs work //
-results.innerHTML = `${outcome[result]}`
+const throwABone = document.querySelector('.show');
+const guessOptions = document.querySelector('.guess_options');
+const changeAmount = document.querySelector('.user_guesses');
+const changeBtn = document.querySelector('.change_guess');
+
+const artNote = document.getElementById('art');
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick))
-// play again
-
-// lvl 2 button
-// lvl 3 button
+playAgain.addEventListener('click', initialise);
+shuffleBtn.addEventListener('click', initialise);
+throwABone.addEventListener('click', reveal);
+changeBtn.addEventListener('click', changeGuess)
 
 
 /*----- functions -----*/
 
 function initialise() { 
+    hideCards();
     shuffle();
-    result = '';
-    timer();
+    resetGuesses();
+    // timer();
+    results.innerHTML = "Click any card to get started!";
+    shuffleBtn.style.visibility = 'visible';
+    playAgain.style.visibility = 'hidden';
+    artNote.style.visibility = 'hidden';
+    guessOptions.style.visibility = 'hidden';
+
+}
+
+function resetGuesses() {
+    if (newGuesses === 0) {
+        guessCount = startingGuesses;
+    } else guessCount = newGuesses;
+    remainingGuess.innerHTML = `GUESSES LEFT: <strong>${guessCount}</strong>`;
+    remainingGuess.style.visibility = 'visible';
 }
 
 
-// assign first flip to card 1, second flip to card 2
-// is card 1 equal to card 2? 
-//   use class of card 1 === class of card 2?
-// if yes, flip, cant touch, if no, return to card front
-// when all cards flipped, endgame()
-
-// Things to do:
-// disable click once flipped -done
-// add correct
-// add guess counter
-
-let firstCard;
 
 function handleClick() {
     // Prevent repeat selection
@@ -67,116 +73,153 @@ function handleClick() {
     if (count === 2) {
         count = 0;
         const secondCard = this.classList;
-        // console.log('second is ' + secondCard)
         // Check to see if matching pair
         if (firstCard[1] === secondCard[1]) {
-            updateGuess();
-            // console.log(guessCount);
-            // result = [1];
-            // console.log(result)
-            // console.log('matches')
+            updateGuessCount();
+            celebrate();
+            gameWon();
             return;
         } else {
-            // Reset selected cards
-            // set timer here
-            updateGuess();
-            setTimeout(resetSelectedCards, 500);
+            updateGuessCount();
+            encourage();
+            setTimeout(resetSelectedCards, 600);
             return;
             function resetSelectedCards () {
-                // console.log('doesnt match')
-                // console.log(firstCard)
-                // console.log(secondCard)
                 firstCard.remove('is-flipped');
                 secondCard.remove('is-flipped');
-                // console.log(firstCard[2])
-                // console.log(secondCard[2])
                 return;
             }
             
         }
     }
     firstCard = this.classList;
-    // console.log('firstCard is ' + firstCard)
-    // console.log('count = ' + count)
 }
 
-
-
-function updateGuess (){
+function updateGuessCount (){
     guessCount -= 1;
     guessString = guessCount.toString();
     remainingGuess.innerHTML = `GUESSES LEFT: <strong>${guessString}</strong>`;
-}
+    if (guessCount === 0) {
+        showCards();
+        showHidden();
+        shuffleBtn.style.visibility = 'hidden';
+}}
 
-
-// lets figure out how to apply a 'new' card to an existing spot
-// put all unique cards in an array?
-// math random or random selector of element in array
-// apply that to new card
-
-// get all images
-// assign random images square by square
-
-
-// use a foreach loop to randomly push into array?
-// another for each loop to assign into every cardback?
 
 const cardsArr = Array.from(cards);
 const imagesArr = Array.from(images);
 
-let randomCardsArr = [];
-let randomImageArr = [];
-let randomIndex = [];
-
 function shuffle() {
     // Images and card pairs are randomised together using the same randomised index arr
-    randomCardsArr = [];
-    randomImageArr = [];
+    let randomCardsArr = [];
+    let randomImageArr = [];
+    let randomIndex = [];
     
     cardsArr.forEach((card, index) => {
         randomIndex.push(Math.floor(Math.random()*16));
         randomCardsArr.splice([randomIndex[index]],0,(card.classList[1]));
-        // index += 1;
     })
     imagesArr.forEach((image, index) => {
         randomImageArr.splice([randomIndex[index]],0,(image));
-        // index += 1;
     });
-    console.log('index ' + randomIndex);
-    console.log(randomImageArr)
-
+    
     cardsArr.forEach((card, index) => {
         card.classList.remove(card.classList[1]);
         card.classList.add(randomCardsArr[index]);
-        // index += 1;
-        console.log(card.classList)
     })
     imagesArr.forEach((image,index) => {
-        image.remove();
         cardBacks[index].appendChild(randomImageArr[index]);
-        // index +=1;
     })
-    console.log(randomImageArr)
 }
-    // imagesArr.forEach((image,index) => {
-    //     // images[index].remove();
-    //     image.remove();
-    //     // console.log(imagesArr);
-    //     console.log(images);
-    //     // console.log('cardback is ' + cardBacks[index])
-    //     cardBacks[index].appendChild(randomImageArr[index]);
-    //     index += 1;
-    //     // console.log(cardBacks);
-    // })
 
-
-    // console.log('random cards is ' + randomCardsArr)
-    // console.log('random images is ' + randomImageArr)
-    // console.log('randomIndex is ' + randomIndex)
-    
-function timer() {
-    
+function gameWon() {
+    let checkArr = [];
+    let playerWon;
+    cards.forEach(card => {
+        checkArr.push(card.classList.contains('is-flipped'))
+        playerWon = checkArr.every(element => element === true);
+    })
+    if (playerWon) {
+        results.innerHTML = 'You did it!'
+        playAgain.style.visibility = 'visible';
+        // high score  
+        artNote.style.visibility = 'visible';
+        shuffleBtn.style.visibility = 'hidden';
+    }
 }
-// console.log(card.classList)
 
-shuffle();
+function celebrate() {
+    results.innerHTML = result.correct[Math.floor(Math.random()*4)]
+}
+function encourage() {
+    results.innerHTML = result.incorrect[Math.floor(Math.random()*4)]
+}
+
+function hideCards() {
+    cards.forEach(card => {
+        card.classList.remove('is-flipped');
+    }
+)}
+function showCards() {
+    setTimeout(showAll, 800);
+    function showAll () {
+        cards.forEach(card => {
+        card.classList.add('is-flipped');
+    }
+)}
+}
+
+function showHidden() {
+    playAgain.style.visibility = 'visible';
+    throwABone.style.visibility = 'visible';
+    remainingGuess.style.visibility = 'hidden';
+}
+
+function reveal() {
+    guessOptions.style.visibility = 'visible';
+    throwABone.style.visibility = 'hidden';
+}
+
+function changeGuess() {
+    newGuesses = changeAmount.value;
+    guessCount = newGuesses;
+    playAgain.style.visibility = 'hidden';
+    throwABone.style.visibility = 'hidden';
+    guessOptions.style.visibility = 'hidden';
+    initialise();
+}
+
+initialise();
+
+
+
+
+
+
+
+
+
+// const timerTxt = document.getElementById('timer');
+
+// function timer() {
+    // let sec = 0;
+    // let min = 0;
+    // let startTime = 0;
+    // let elapsedTime = 0;
+//     startTime = Date.now() - elapsedTime;
+//     intervalId = setInterval(updateTime, 1000)
+
+//     function updateTime() {
+//         elapsedTime = Date.now() - startTime;
+
+//         sec = Math.floor((elapsedTime / 1000) % 60);
+//         min = Math.floor((elapsedTime / (1000 * 60)) % 60);
+
+//         sec = pad(sec);
+//         min = pad(min);
+//         timerTxt.innerHTML = `${min} : ${sec}`;
+//         function pad(unit) {
+//             return (('0') + unit).length > 2 ? unit : "0" + unit;
+//         }
+//     }
+// }
