@@ -5,8 +5,8 @@ const result = {
 }
 
 /*----- state variables -----*/
-let startingGuesses = 1;
-let guessCount = 1;
+let startingGuesses = 20;
+let guessCount = 20;
 let count = 0;
 let firstCard;
 let newGuesses = 0;
