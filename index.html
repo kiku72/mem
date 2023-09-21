@@ -14,13 +14,12 @@
 <body>
     <header>
         <h1 class="title">CONCENTRATION</h1>
-        <h2 class="title">THE MEMORY GAME</h2>
+        <h2 class="subtitle">THE MEMORY GAME</h2>
     </header>
     
     <main>
         <section class="game">
             <div class="memory_game">
-                
                 <div class="card_face pair_1">
                     <div class="card_face_front"></div>
                     <div class="card_face_back">
@@ -128,19 +127,22 @@
             </div>
         </section>
         <section class="infoCard">
-            <div class="result">Click any card to get started!</div>
-            <!-- <div id="timer">00 : 00</div> -->
-            <button type="button" id="shuffle">SHUFFLE CARDS</button>
-            <button type="button" id="play_again">PLAY AGAIN</button>
-            <div id="art">The artwork featured on these cards were created by a Japanese painter and print designer by the name of Ohara Koson (1877-1945). You can find more of his work <a href="https://www.rawpixel.com/board/431491/ohara-koson-free-public-domain-vintage-flowers-and-animals-prints">here</a>.</div>
-            <div class="guess_count"> </div>
+            <div>
+                <div class="result">Click any card to get started!</div>
+                <button class="show">Too Difficult?</button>
+                <div id="art">The artwork featured on these cards were created by a Japanese painter and print designer by the name of Ohara Koson (1877-1945). You can find more of his work <a href="https://www.rawpixel.com/board/431491/ohara-koson-free-public-domain-vintage-flowers-and-animals-prints">here</a>.</div>
+            </div>
+            <button type="button" id="shuffle">SHUFFLE</button>
 
-            <button class="show">Too Difficult?</button>
             <div class="guess_options">
-                <a>Feel free to adjust the amount of guesses</a>
+                <a>Change our guess limit to &nbsp;</a>
                 <input placeholder = "guesses" class="user_guesses"></input>
                 <button class="change_guess">SUBMIT</button>
             </div>
+            <!-- <div id="timer">00 : 00</div> -->
+            <button type="button" id="play_again">PLAY AGAIN</button>
+            <div class="guess_count"> </div>
+
         </section>
     </main>
 </body>
