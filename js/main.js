@@ -3,10 +3,11 @@ const result = {
     correct : ['Nice!', 'Well Done!', 'Perfect!', "That's it!", "Great work!"],
     incorrect : ['Not quite!', 'Try Again!', 'Oops!', 'Keep Trying!', 'So close', 'You can do it!' ]
 }
+const gameComplete = false;
 
 /*----- state variables -----*/
-let startingGuesses = 20;
-let guessCount = 20;
+let startingGuesses = 5;
+let guessCount = 5;
 let count = 0;
 let firstCard;
 let newGuesses = 0;
@@ -34,7 +35,7 @@ const artNote = document.getElementById('art');
 cards.forEach(card => card.addEventListener('click', handleClick))
 playAgain.addEventListener('click', initialise);
 shuffleBtn.addEventListener('click', initialise);
-changeDifficulty.addEventListener('click', reveal);
+changeDifficulty.addEventListener('click', revealOptions);
 changeBtn.addEventListener('click', changeGuess)
 
 
@@ -47,10 +48,11 @@ function initialise() {
     // timer();
     results.innerHTML = "Click any card to get started!";
     // shuffleBtn.style.visibility = 'visible';
+    changeDifficulty.style.visibility = "none";
     playAgain.style.display = 'none';
     artNote.style.visibility = 'hidden';
     guessOptions.style.visibility = 'hidden';
-
+    gameComplete = false;
 }
 
 function resetGuesses() {
@@ -64,9 +66,11 @@ function resetGuesses() {
 
 
 function handleClick() {
+    if (gameComplete) return;
+    
     // Reveal shuffle button after first turn is taken
     if (guessCount < startingGuesses) {
-        shuffleBtn.style.visibility = 'visible';
+        shuffleBtn.style.display = 'inline';
     }
 
     // Prevent repeat selection
@@ -105,10 +109,7 @@ function updateGuessCount (){
     guessString = guessCount.toString();
     remainingGuess.innerHTML = `GUESSES LEFT: <strong>${guessString}</strong>`;
     if (guessCount === 0) {
-        showCards();
-        showHidden();
-        shuffleBtn.style.visibility = 'hidden';
-        results.innerHTML = 'Better luck next time!'
+        gameOver();
 }}
 
 
@@ -116,7 +117,7 @@ const cardsArr = Array.from(cards);
 const imagesArr = Array.from(images);
 
 function shuffle() {
-    shuffleBtn.style.visibility = 'hidden';
+    shuffleBtn.style.display = 'none';
     // Images and card pairs are randomised together using the same randomised index arr
     let randomCardsArr = [];
     let randomImageArr = [];
@@ -147,17 +148,26 @@ function gameWon() {
         playerWon = checkArr.every(element => element === true);
     })
     if (playerWon) {
-        results.innerHTML = 'You did it!'
-        playAgain.style.display = 'inline-block';
+        gameComplete = true;
+        results.innerHTML = 'You did it!';
+        playAgain.style.display = 'inline';
         // high score  
         artNote.style.visibility = 'visible';
-        shuffleBtn.style.visibility = 'hidden';
+        shuffleBtn.style.display = 'none';
+        remainingGuess.style.visibility = 'hidden';
         changeDifficulty.style.visibility = 'hidden';
     }
 }
-
 function celebrate() {
     results.innerHTML = result.correct[Math.floor(Math.random()*4)]
+}
+
+function gameOver() {
+    showCards();
+    showHidden();
+    shuffleBtn.style.display = 'none';
+    results.innerHTML = 'Better luck next time!';
+    gameComplete = true;
 }
 function encourage() {
     results.innerHTML = result.incorrect[Math.floor(Math.random()*4)]
@@ -178,20 +188,21 @@ function showCards() {
 }
 
 function showHidden() {
-    playAgain.style.visibility = 'visible';
+    playAgain.style.display = 'inline';
     changeDifficulty.style.visibility = 'visible';
     remainingGuess.style.visibility = 'hidden';
 }
 
-function reveal() {
+function revealOptions() {
     guessOptions.style.visibility = 'visible';
+    playAgain.style.display='none';
     changeDifficulty.style.visibility = 'hidden';
 }
 
 function changeGuess() {
     newGuesses = changeAmount.value;
     guessCount = newGuesses;
-    playAgain.style.visibility = 'hidden';
+    // playAgain.style.visibility = 'hidden';
     changeDifficulty.style.visibility = 'hidden';
     guessOptions.style.visibility = 'hidden';
     initialise();

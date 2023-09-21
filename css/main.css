@@ -168,6 +168,7 @@ img {
 .guess_count {
 margin-top: 1em;
   font-size: 1.5rem;
+  visibility: visible;
 }
 
 .guess_options {
@@ -231,8 +232,10 @@ a {
 
 #art {
   visibility: hidden;
-  min-width: 35rem;
-  text-align: center;
+  min-width: 10rem;
+    text-align: center;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
 }
 
 @media (width < 600px) {
