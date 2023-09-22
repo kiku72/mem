@@ -23,18 +23,14 @@ let gameComplete = false;
 const cards = document.querySelectorAll(".card_face");
 const remainingGuess = document.querySelector(".guess_count");
 const results = document.querySelector(".result");
-
 const images = document.querySelectorAll("img");
 const cardBacks = document.querySelectorAll(".card_face_back");
-
 const playAgain = document.getElementById("play_again");
 const shuffleBtn = document.getElementById("shuffle");
-
 const changeDifficulty = document.querySelector(".show");
 const guessOptions = document.querySelector(".guess_options");
 const changeAmount = document.querySelector(".user_guesses");
 const changeBtn = document.querySelector(".change_guess");
-
 const artNote = document.getElementById("art");
 
 /*----- event listeners -----*/
@@ -67,15 +63,13 @@ function resetGuesses() {
 }
 
 function handleClick() {
-    // Prevents shuffle button from being visible on endscreen
+    // Prevents shuffle button visibility from being triggered on endscreen
     if (gameComplete) return;
-
     // Reveal shuffle button after first turn is taken
     if (guessCount < startingGuesses) {
         shuffleBtn.style.display = "inline";
     }
-
-    // Prevent repeat selection
+    // Prevent repeat selection of same card
     if (this.classList[2] != undefined || guessCount === 0) return;
     // Flip user selected card
     this.classList.toggle("is-flipped");
